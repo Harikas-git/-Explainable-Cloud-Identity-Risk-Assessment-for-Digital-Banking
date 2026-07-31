@@ -1,0 +1,2 @@
+# -Explainable-Cloud-Identity-Risk-Assessment-for-Digital-Banking
+An explainable AI framework for continuous cloud identity risk assessment in digital banking. Combines ML-based risk scoring (Random Forest/XGBoost + autoencoder anomaly detection) with SHAP/LIME explainability to produce transparent, auditable risk decisions for adaptive access control and compliance in cloud-hosted banking infrastructure.
