@@ -10,9 +10,9 @@
 
 | Name | Role / Subsystem Ownership | Department & Institution |
 | :--- | :--- | :--- |
-| **Harika** | **Explanation Layer & Formal Graph Modeling** | Computer Science & Engineering, VIT Vellore |
-| **Ashmit** | **Risk Scoring Engine & Telemetry Pipeline** | Computer Science & Engineering, VIT Vellore |
-| **Priyanshu** | **Decision Policy Engine & Audit Interface** | Computer Science & Engineering, VIT Vellore |
+| **Harika** | **Explanation Layer & Formal Graph Modeling** | Information Technology, VIT Vellore |
+| **Ashmit** | **Risk Scoring Engine & Telemetry Pipeline** | Information Technology, VIT Vellore |
+| **Priyanshu** | **Decision Policy Engine & Audit Interface** | Information Technology, VIT Vellore |
 
 *For the comprehensive task breakdown and responsibility matrix, see [WORK_DISTRIBUTION.md](WORK_DISTRIBUTION.md) or [documentation/work_distribution.md](documentation/work_distribution.md).*
 
