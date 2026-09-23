@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Testing & Logs
+.pytest_cache/
+*.log
+test_audit_log.jsonl
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
