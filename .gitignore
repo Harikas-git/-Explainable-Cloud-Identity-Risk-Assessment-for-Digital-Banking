@@ -18,5 +18,3 @@ test_audit_log.jsonl
 Thumbs.db
 .vscode/
 .idea/
-
-*.xlsx

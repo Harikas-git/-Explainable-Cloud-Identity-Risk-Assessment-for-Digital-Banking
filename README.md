@@ -45,19 +45,6 @@ In high-stakes digital banking, this opacity creates severe operational and regu
 
 ---
 
-## 🛡️ Patent Inventions & Security Claims
-
-> **Patent Title:** *System and Method for Adversarially Robust, Cryptographically Attested Explanation Graphs in Continuous Zero-Trust Identity Authorization*  
-> **Form 2 Specification:** See [PATENT_SPECIFICATION.md](PATENT_SPECIFICATION.md) or [documentation/patent_disclosure.md](documentation/patent_disclosure.md) for the complete 18-claim patent specification.
-
-This architecture introduces four novel, patent-pending technical security innovations:
-1. **Merkleized Explanation Graph ($M\text{-}EG$) with Zero-Knowledge Selective Disclosure:** Compiles authorization graphs into Merkle-DAGs, allowing external compliance auditors to verify specific risk factors via $O(\log N)$ Merkle proofs without exposing private employee/banking telemetry.
-2. **Dual-Consistency Adversarial Evasion & Hijacking Detector (DC-AEHD):** Evaluates empirical numerical gradients against Shapley attribution signs to detect adversarial perturbation and explanation hijacking attacks (e.g., Slack et al., AIES 2020), routing attacks into a deceptive quarantine honey-buffer.
-3. **Provably Monotonic Constrained Counterfactual Optimizer (PMCCO):** Formulates quadratic remediation programs with strict directional monotonicity invariants (preventing impossible or retroactive recommendations).
-4. **Sliding-Window Continuous Session Merkle-Chaining (SW-MC):** Continuously chains intra-session micro-assessments into a forward-secure hash chain, detecting token hijacking and session drift in real time.
-
----
-
 ## 🏗️ Proposed Architecture & Framework
 
 The framework operates as a five-stage pipeline:
