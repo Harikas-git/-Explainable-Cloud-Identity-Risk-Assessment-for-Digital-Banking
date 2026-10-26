@@ -218,7 +218,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                         </h3>
                         <p class="text-xs text-slate-400">Operationalizing Hasel Mehri et al. (SACMAT '25) DAG Structure</p>
                     </div>
-                    <span class="text-xs px-2.5 py-1 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-mono">Soundness: 100%</span>
+                    <span id="soundnessScore" class="text-xs px-2.5 py-1 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-mono">Soundness: --</span>
                 </div>
 
                 <!-- Mermaid Diagram Container -->
@@ -412,6 +412,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
             // Audit
             document.getElementById('auditHash').innerText = data.audit_record.integrity_hash;
+            if (data.soundness_score !== undefined) {
+                document.getElementById('soundnessScore').innerText = 'Soundness: ' + data.soundness_score + '%';
+            }
             document.getElementById('auditTime').innerText = data.audit_record.timestamp;
         }
 
@@ -524,7 +527,8 @@ class XRACRequestHandler(http.server.SimpleHTTPRequestHandler):
                 "attributions": attributions,
                 "mermaid_diagram": graph.mermaid_diagram,
                 "narratives": narratives,
-                "audit_record": audit_rec
+                "audit_record": audit_rec,
+                "soundness_score": graph.soundness_score
             }
 
             self.send_response(200)

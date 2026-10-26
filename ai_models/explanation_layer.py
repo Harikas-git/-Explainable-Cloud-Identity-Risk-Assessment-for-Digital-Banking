@@ -165,9 +165,11 @@ class ExplanationLayer:
         ]
 
         dec_class = "grant" if decision_res.decision == "GRANT" else ("stepup" if decision_res.decision == "STEP_UP_MFA" else "deny")
-        mermaid_lines.append(f'  DECISION["{decision_res.decision}"]::: {dec_class}')
-        mermaid_lines.append(f'  POLICY["{decision_res.policy_rule_matched.split(":")[0]}"]:::policy')
-        mermaid_lines.append(f'  RISK["Risk Score: {decision_res.risk_score}/100"]:::risk')
+        # Strip special characters from policy label to avoid Mermaid parse errors
+        policy_label = decision_res.policy_rule_matched.split(":")[0].replace('"', "'")
+        mermaid_lines.append(f'  DECISION["{decision_res.decision}"]:::{dec_class}')
+        mermaid_lines.append(f'  POLICY["{policy_label}"]:::policy')
+        mermaid_lines.append(f'  RISK["Risk Score {decision_res.risk_score} of 100"]:::risk')
         mermaid_lines.append('  RISK -->|Evaluated by| POLICY')
         mermaid_lines.append('  POLICY -->|Dictates| DECISION')
 
@@ -175,7 +177,11 @@ class ExplanationLayer:
             node_id = f"F_{idx+1}"
             raw_val = getattr(req, factor, None)
             sign = "+" if weight > 0 else ""
-            label_text = f"{factor.replace('_', ' ').title()}: {raw_val} ({sign}{weight})"
+            # Format cleanly without parentheses, which break Mermaid parsing
+            val_str = f"{raw_val:.2f}" if isinstance(raw_val, float) else str(raw_val)
+            weight_str = f"{sign}{weight:.2f}"
+            feature_title = factor.replace('_', ' ').title()
+            label_text = f"{feature_title}: {val_str} [{weight_str}]"
 
             nodes.append(ExplanationNode(
                 id=node_id,
@@ -193,14 +199,19 @@ class ExplanationLayer:
             ))
 
             mermaid_lines.append(f'  {node_id}["{label_text}"]:::factor')
-            mermaid_lines.append(f'  {node_id} -->|{sign}{weight}| RISK')
+            mermaid_lines.append(f'  {node_id} -->|{weight_str}| RISK')
 
         mermaid_str = "\n".join(mermaid_lines)
+
+        # Compute actual soundness: fraction of risk explained by top 4 factors
+        top_weight_sum = sum(abs(w) for _, w in top_factors)
+        all_weight_sum = sum(abs(v) for v in attributions.values())
+        soundness = round((top_weight_sum / all_weight_sum * 100) if all_weight_sum > 0 else 100.0, 1)
 
         return ExplanationGraph(
             nodes=nodes,
             edges=edges,
-            soundness_score=100.0,
+            soundness_score=soundness,
             mermaid_diagram=mermaid_str
         )
 
